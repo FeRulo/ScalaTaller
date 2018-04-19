@@ -18,7 +18,7 @@ trait InterpreteServicioArchivo extends ServicioArchivo{
     for{
       lista<-lineas
     }yield(
-      lista.map(s=>traerRuta(Try{s}).get)
+      lista.map(s=>traerRuta(s))
     )
   }
 

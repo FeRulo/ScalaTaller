@@ -6,33 +6,32 @@ import scala.util.Try
 
 sealed trait ServicioRuta {
 
-  def traerRuta(linea:Try[String]):Try[Ruta]
-  def traerListaInstruccines(linea:Try[String]):Try[List[Instruccion]]
   def traerInstruccion(instruccion: String):Try[Instruccion]
-  def pasarListaInstruccionesARuta(listaInstrucciones: Try[List[Instruccion]]): Try[Ruta]
+  def traerRuta(linea:String):Ruta
+  def traerListaInstruccines(linea:String):List[Instruccion]
+  def pasarListaInstruccionesARuta(listaInstrucciones: List[Instruccion]): Ruta
 
 }
 
 sealed trait InterpreteServicioRuta extends ServicioRuta{
+
   def traerInstruccion(instruccion: String):Try[Instruccion]={
     Try{Instruccion.of(instruccion)}
   }
 
-  def pasarListaInstruccionesARuta(listaInstrucciones: Try[List[Instruccion]]): Try[Ruta] = {
-    listaInstrucciones.flatMap(li => Try{Ruta(li)})
+  def pasarListaInstruccionesARuta(listaInstrucciones: List[Instruccion]): Ruta = {
+    Ruta(listaInstrucciones)
   }
 
-  def traerListaInstruccines(linea: Try[String]): Try[List[Instruccion]] = {
-    linea.map(s=>s.toCharArray())
-      .map(l=> l.toList
+  def traerListaInstruccines(linea: String): List[Instruccion] = {
+    linea.toCharArray.toList
         .map(c=>c.toString)
         .map(s=>traerInstruccion(s))
         .filter(t=> t.isSuccess)
         .map(t=>t.get)
-      )
   }
 
-  def traerRuta(linea: Try[String]): Try[Ruta] = {
+  def traerRuta(linea: String): Ruta = {
       pasarListaInstruccionesARuta(traerListaInstruccines(linea))
   }
 }

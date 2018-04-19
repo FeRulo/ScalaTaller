@@ -52,17 +52,17 @@ class ArchivoSuite extends FunSuite{
   }
 
   test("convertir linea a ruta"){
-    val linea = Try{"AID"}
+    val linea = "AID"
     val ruta = traerRuta(linea)
-    assertResult( Try{Ruta(List(A(),I(),D()))} ){
+    assertResult( Ruta(List(A(),I(),D())) ){
       ruta
     }
   }
 
   test("convertir lineaPopo a ruta"){
-    val linea = Try{"***A**I**D*"}
+    val linea = "***A**I**D*"
     val ruta = traerRuta(linea)
-    assertResult( Try{Ruta(List(A(),I(),D()))} ){
+    assertResult( Ruta(List(A(),I(),D())) ){
       ruta
     }
   }
