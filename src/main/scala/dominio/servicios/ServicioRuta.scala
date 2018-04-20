@@ -6,18 +6,13 @@ import scala.util.Try
 
 sealed trait ServicioRuta {
 
-  def traerInstruccion(instruccion: String):Try[Instruccion]
   def traerRuta(linea:String):Ruta
   def traerListaInstruccines(linea:String):List[Instruccion]
   def pasarListaInstruccionesARuta(listaInstrucciones: List[Instruccion]): Ruta
 
 }
 
-sealed trait InterpreteServicioRuta extends ServicioRuta{
-
-  def traerInstruccion(instruccion: String):Try[Instruccion]={
-    Try{Instruccion.of(instruccion)}
-  }
+trait InterpreteServicioRuta extends ServicioRuta{
 
   def pasarListaInstruccionesARuta(listaInstrucciones: List[Instruccion]): Ruta = {
     Ruta(listaInstrucciones)
@@ -26,7 +21,7 @@ sealed trait InterpreteServicioRuta extends ServicioRuta{
   def traerListaInstruccines(linea: String): List[Instruccion] = {
     linea.toCharArray.toList
         .map(c=>c.toString)
-        .map(s=>traerInstruccion(s))
+        .map(s=>Instruccion.of(s))
         .filter(t=> t.isSuccess)
         .map(t=>t.get)
   }

@@ -1,14 +1,16 @@
 package dominio.entidades
 
+import scala.util.{Failure, Success, Try}
+
 sealed trait Instruccion
 
 object Instruccion {
-  def of(c:String):Instruccion ={
-    c match {
-      case "A" => A
-      case "D" => D
-      case "I" => I
-      case _ => throw new Exception(s"Caracter invalido para creacion de instruccion: $c")
+  def of(i:String):Try[Instruccion] ={
+    i match {
+      case "A" => Success{A}
+      case "D" => Success{D}
+      case "I" => Success{I}
+      case _ => Failure{new Exception(s"Caracter invalido para creacion de instruccion: $i")}
     }
   }
 }
