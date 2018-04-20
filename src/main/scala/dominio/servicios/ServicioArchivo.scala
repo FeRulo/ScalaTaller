@@ -1,5 +1,7 @@
 package dominio.servicios
 
+import java.io.{File, PrintWriter}
+
 import dominio.entidades.Ruta
 import dominio.servicios.InterpreteServicioRuta._
 
@@ -8,7 +10,7 @@ import scala.util.Try
 
 sealed trait ServicioArchivo {
   def leerArchivo(origen: String):Try[List[Ruta]]
-  def escribirArchivo(destino: String, lineas:List[String]): Try[List[String]]
+  def escribirReporteEnArchivo(destino: String, lineas:String): String
 }
 
 sealed trait InterpreteServicioArchivo extends ServicioArchivo{
@@ -22,8 +24,12 @@ sealed trait InterpreteServicioArchivo extends ServicioArchivo{
     )
   }
 
-
-  override def escribirArchivo(destino: String, lineas: List[String]): Try[List[String]] = ???
+  override def escribirReporteEnArchivo(destino: String, lineas:String): String = {
+    val pw = new PrintWriter(new File(destino ))
+    pw.write(lineas)
+    pw.close
+    s"Escritura Exitosa"
+  }
 }
 
 object InterpreteServicioArchivo extends InterpreteServicioArchivo
