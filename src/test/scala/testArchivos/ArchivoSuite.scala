@@ -142,6 +142,7 @@ class ArchivoSuite extends FunSuite{
         reporte
     }
   }
+
   test("reportar Entregas origen Exceso Lineas") {
     val origen = "src/main/resources/inExcesoLineas.txt"
     val listaRutas = leerArchivo(origen)
@@ -162,6 +163,7 @@ class ArchivoSuite extends FunSuite{
       reporte
     }
   }
+
   test("reportar Entregas origen Saliendose Límites") {
     val origen = "src/main/resources/inSaliendoseLimites.txt"
     val listaRutas = leerArchivo(origen)

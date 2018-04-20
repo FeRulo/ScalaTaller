@@ -88,15 +88,16 @@ sealed trait InterpreteServicioDron extends ServicioDron {
   }
 
   override def reportarRutas(listaRutas: Try[List[Ruta]], dron: Dron, limite: Limite): Try[String] = {
-    var ed = Either.cond(true,dron,"")
     listaRutas
-      .map(lr => lr
-        .foldLeft("==Reporte de entregas=="){ (reporte, ruta) =>{
-            ed = ed.flatMap(d=>entregarPedido(ed, ruta, limite))
-            s"$reporte\n ${ed.fold(s => s, d => imprimirPosicion(d.posicion))}"
-          }
-        }
-      )
+              .map(lr => lr
+                .foldLeft(List(Either.cond(true,dron,""))){(led, ruta)=>
+                  (entregarPedido(led.head, ruta, limite))::led
+                }
+                .reverse.tail
+                .foldLeft("==Reporte de entregas=="){ (reporte,edron) =>
+                    s"$reporte\n ${edron.fold(s => s, d => imprimirPosicion(d.posicion))}"
+                }
+              )
   }
 }
 
