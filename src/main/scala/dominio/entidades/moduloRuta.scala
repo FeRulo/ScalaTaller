@@ -16,3 +16,6 @@ object Instruccion {
 object A extends Instruccion
 object D extends Instruccion
 object I extends Instruccion
+
+
+case class Ruta(instrucciones:List[Instruccion])

@@ -2,18 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6d815a81-8129-4d81-84ed-525eeb8abeec" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/out.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/out.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/outExcesoLineas.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/outExcesoLineas.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/outSaliendoseLimites.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/outSaliendoseLimites.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/scala/dominio/servicios/ServicioDron.scala" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/scala/dominio/servicios/ServicioDron.scala" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/scala/testArchivos/ArchivoSuite.scala" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/scala/testArchivos/ArchivoSuite.scala" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/scala-2.12/classes/dominio/servicios/InterpreteServicioDron$.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/scala-2.12/classes/dominio/servicios/InterpreteServicioDron$.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/scala-2.12/classes/dominio/servicios/InterpreteServicioDron.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/scala-2.12/classes/dominio/servicios/InterpreteServicioDron.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/scala-2.12/classes/out.txt" beforeDir="false" afterPath="$PROJECT_DIR$/target/scala-2.12/classes/out.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/scala-2.12/test-classes/testArchivos/ArchivoSuite$$anonfun$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/scala-2.12/test-classes/testArchivos/ArchivoSuite$$anonfun$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/scala-2.12/test-classes/testArchivos/ArchivoSuite$$anonfun$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/scala-2.12/test-classes/testArchivos/ArchivoSuite$$anonfun$4.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/scala-2.12/test-classes/testArchivos/ArchivoSuite.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/scala-2.12/test-classes/testArchivos/ArchivoSuite.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/scala/dominio/entidades/Instruccion.scala" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/scala/dominio/entidades/Instruccion.scala" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/scala/dominio/entidades/Ruta.scala" beforeDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -36,11 +26,20 @@
       <file leaf-file-name="ArchivoSuite.scala" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/test/scala/testArchivos/ArchivoSuite.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="56">
-              <caret line="110" column="2" selection-start-line="110" selection-start-column="2" selection-end-line="110" selection-end-column="2" />
+            <state relative-caret-position="-34">
+              <caret line="145" column="2" selection-start-line="145" selection-start-column="2" selection-end-line="145" selection-end-column="2" />
               <folding>
                 <element signature="e#22#58#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="inExcesoLineas.txt" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/inExcesoLineas.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="60">
+              <caret line="4" column="7" selection-start-line="4" selection-start-column="7" selection-end-line="4" selection-end-column="7" />
             </state>
           </provider>
         </entry>
@@ -54,10 +53,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ServicioDron.scala" pinned="false" current-in-tab="true">
+      <file leaf-file-name="ServicioDron.scala" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/scala/dominio/servicios/ServicioDron.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="406">
+            <state relative-caret-position="320">
               <caret line="99" column="15" lean-forward="true" selection-start-line="99" selection-start-column="15" selection-end-line="99" selection-end-column="15" />
               <folding>
                 <element signature="e#27#63#0" expanded="true" />
@@ -71,11 +70,11 @@
           <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
-      <file leaf-file-name="Instruccion.scala" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Instruccion.scala" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/scala/dominio/entidades/Instruccion.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="150">
-              <caret line="10" column="12" lean-forward="true" selection-start-line="10" selection-start-column="12" selection-end-line="10" selection-end-column="12" />
+            <state relative-caret-position="199">
+              <caret line="20" lean-forward="true" selection-start-line="20" selection-end-line="20" />
             </state>
           </provider>
         </entry>
@@ -102,14 +101,12 @@
       <list>
         <option value="$PROJECT_DIR$/build.sbt" />
         <option value="$PROJECT_DIR$/src/main/scala/dominio/entidades/Ruta.java" />
-        <option value="$PROJECT_DIR$/src/main/scala/dominio/entidades/Ruta.scala" />
         <option value="$PROJECT_DIR$/src/main/resources/origen.txt" />
         <option value="$PROJECT_DIR$/src/main/resources/scriptFile.scala" />
         <option value="$PROJECT_DIR$/src/main/resources/origenMalo.txt" />
         <option value="$PROJECT_DIR$/src/main/scala/dominio/servicios/ServicioRuta.scala" />
         <option value="$PROJECT_DIR$/src/main/scala/dominio/entidades/Dron.scala" />
         <option value="$PROJECT_DIR$/src/main/scala/dominio/entidades/Posicion.scala" />
-        <option value="$PROJECT_DIR$/src/main/scala/dominio/entidades/Instruccion.scala" />
         <option value="$PROJECT_DIR$/src/main/scala/dominio/entidades/moduloDron.scala" />
         <option value="$PROJECT_DIR$/src/main/resources/in.txt" />
         <option value="$PROJECT_DIR$/src/main/resources/inExcesoLineas.txt" />
@@ -117,6 +114,8 @@
         <option value="$PROJECT_DIR$/src/main/scala/dominio/servicios/ServicioArchivo.scala" />
         <option value="$PROJECT_DIR$/src/test/scala/testArchivos/ArchivoSuite.scala" />
         <option value="$PROJECT_DIR$/src/main/scala/dominio/servicios/ServicioDron.scala" />
+        <option value="$PROJECT_DIR$/src/main/scala/dominio/entidades/Ruta.scala" />
+        <option value="$PROJECT_DIR$/src/main/scala/dominio/entidades/Instruccion.scala" />
       </list>
     </option>
   </component>
@@ -156,13 +155,6 @@
               <item name="CrearRutas" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="CrearRutas" type="b2602c69:ProjectViewProjectNode" />
-              <item name="CrearRutas" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="CrearRutas" type="b2602c69:ProjectViewProjectNode" />
@@ -427,12 +419,6 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="ArchivoSuite_reportar_Entregas - 2018.04.20 at 08h 39m 37s.xml">
-      <configuration name="ArchivoSuite.reportar Entregas" configurationId="ScalaTestRunConfiguration" />
-    </history-entry>
-    <history-entry file="ArchivoSuite_reportar_Entregas - 2018.04.20 at 08h 41m 17s.xml">
-      <configuration name="ArchivoSuite.reportar Entregas" configurationId="ScalaTestRunConfiguration" />
-    </history-entry>
     <history-entry file="ArchivoSuite_reportar_Entregas - 2018.04.20 at 08h 41m 31s.xml">
       <configuration name="ArchivoSuite.reportar Entregas" configurationId="ScalaTestRunConfiguration" />
     </history-entry>
@@ -457,6 +443,12 @@
     <history-entry file="ArchivoSuite_reportar_Entregas - 2018.04.20 at 08h 49m 22s.xml">
       <configuration name="ArchivoSuite.reportar Entregas" configurationId="ScalaTestRunConfiguration" />
     </history-entry>
+    <history-entry file="ArchivoSuite_reportar_Entregas - 2018.04.20 at 08h 55m 30s.xml">
+      <configuration name="ArchivoSuite.reportar Entregas" configurationId="ScalaTestRunConfiguration" />
+    </history-entry>
+    <history-entry file="ArchivoSuite - 2018.04.20 at 08h 55m 52s.xml">
+      <configuration name="ArchivoSuite" configurationId="ScalaTestRunConfiguration" />
+    </history-entry>
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -480,12 +472,12 @@
       <window_info anchor="right" id="Capture Analysis" order="3" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
       <window_info anchor="right" id="Maven Projects" order="3" weight="0.3294702" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.41147542" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.41147542" />
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Terminal" order="7" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Designer" order="2" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.28252193" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.28252193" />
       <window_info anchor="bottom" id="sbt-shell-toolwindow" order="7" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -755,13 +747,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/scala/dominio/entidades/Dron.scala" />
-    <entry file="file://$PROJECT_DIR$/src/main/scala/dominio/entidades/Ruta.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" column="48" selection-start-line="2" selection-start-column="48" selection-end-line="2" selection-end-column="48" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$USER_HOME$/.ivy2/cache/org.scala-lang/scala-library/srcs/scala-library-2.12.5-sources.jar!/scala/collection/TraversableOnce.scala">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="154">
@@ -787,20 +772,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="30">
           <caret line="2" column="2" selection-start-line="2" selection-start-column="2" selection-end-line="2" selection-end-column="2" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/scala/dominio/entidades/Instruccion.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="10" column="12" lean-forward="true" selection-start-line="10" selection-start-column="12" selection-end-line="10" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/inExcesoLineas.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="7" selection-start-line="4" selection-start-column="7" selection-end-line="4" selection-end-column="7" />
         </state>
       </provider>
     </entry>
@@ -831,16 +802,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/scala/testArchivos/ArchivoSuite.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="56">
-          <caret line="110" column="2" selection-start-line="110" selection-start-column="2" selection-end-line="110" selection-end-column="2" />
-          <folding>
-            <element signature="e#22#58#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/in.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="30">
@@ -850,11 +811,42 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/scala/dominio/servicios/ServicioDron.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="406">
+        <state relative-caret-position="320">
           <caret line="99" column="15" lean-forward="true" selection-start-line="99" selection-start-column="15" selection-end-line="99" selection-end-column="15" />
           <folding>
             <element signature="e#27#63#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/inExcesoLineas.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="7" selection-start-line="4" selection-start-column="7" selection-end-line="4" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/scala/testArchivos/ArchivoSuite.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-34">
+          <caret line="145" column="2" selection-start-line="145" selection-start-column="2" selection-end-line="145" selection-end-column="2" />
+          <folding>
+            <element signature="e#22#58#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/scala/dominio/entidades/Ruta.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" selection-start-line="2" selection-end-line="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/scala/dominio/entidades/Instruccion.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="199">
+          <caret line="20" lean-forward="true" selection-start-line="20" selection-end-line="20" />
         </state>
       </provider>
     </entry>

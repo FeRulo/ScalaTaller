@@ -34,6 +34,7 @@ sealed trait InterpreteServicioDron extends ServicioDron {
         case E => Posicion(posicion.x, posicion.y, S)
         case O => Posicion(posicion.x, posicion.y, N)
       }
+      case _=> posicion
     }
   }
 
