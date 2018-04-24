@@ -21,4 +21,4 @@ object I extends Instruccion
 
 
 case class Ruta(instrucciones:List[Instruccion])
-case class Pedido(ruta: List[Ruta], dron:Dron)
+case class Pedido(rutas: List[Ruta], dron:Dron)
