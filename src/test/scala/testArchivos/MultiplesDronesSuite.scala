@@ -15,8 +15,9 @@ class MultiplesDronesSuite extends FunSuite{
     val listaArchivos = archivosDe.entrada
     val pedidos = InterpreteDistribuidorPedidosSimultaneos.inicializarPedidos(listaArchivos)
     val fl = pedidos.flatMap(lp=>InterpreteDistribuidorPedidosSimultaneos.reportar(lp))
-    assertResult((1 to 20).map(i=>"Escritura Exitosa").toList){
-      Await.result(fl, 10 seconds)
+    val res = Await.result(fl, 10 seconds)
+    assertResult((1 to res.size).map(i=>"Escritura Exitosa").toList){
+      res
     }
   }
 

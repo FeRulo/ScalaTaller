@@ -20,7 +20,8 @@ sealed trait InterpreteDistribuidorPedidosSimultaneos extends DistribuidorPedido
       .sequence(
         pedidos
           .map(pedido=>(reportarUn(pedido),traerArchivoSalida(pedido.dron)))
-          .map(tu=>tu._1.map(s=>
+          .map(tu=>tu._1
+            .map(s=>
               escribirReporteEnArchivo(tu._2,s)
             )
           )
@@ -34,15 +35,18 @@ sealed trait InterpreteDistribuidorPedidosSimultaneos extends DistribuidorPedido
     }
   }
 
+  def inicializarUn(archivo:String):Future[Try[List[Ruta]]] = {
+    Future{
+      Thread.sleep(tiempo.espera)
+      InterpreteServicioArchivo.leerArchivo(archivo)
+    }
+  }
+
   def inicializarPedidos(listaArchivos: List[String]):Future[List[Pedido]] = {
-    Future.sequence(listaArchivos
-      .map(s=>Future{s})
-      .map(f=>f
-        .map(s=>{
-          Thread.sleep(tiempo.espera)
-          InterpreteServicioArchivo.leerArchivo(s)
-        })
-      )).map(l=>l
+    Future.sequence(
+        listaArchivos
+          .map(s=>inicializarUn(s))
+      ).map(l=>l
           .zip(flotaDe.drones)
           .filter(tu=>tu._1.isSuccess)
           .map(tu=>(tu._1.get,tu._2))
