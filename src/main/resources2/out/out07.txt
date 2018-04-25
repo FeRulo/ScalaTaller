@@ -1,0 +1,7 @@
+==Reporte de entregas==
+ (-2,2) dirección Oeste
+ (-3,5) dirección Norte
+ (-5,7) dirección Este
+ (-3,9) dirección Este
+ La ruta envía el drón fuera del límite
+ La ruta envía el drón fuera del límite

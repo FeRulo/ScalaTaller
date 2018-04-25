@@ -47,11 +47,11 @@ sealed trait InterpreteDistribuidorPedidosSimultaneos extends DistribuidorPedido
         listaArchivos
           .map(archivo=>inicializarUn(archivo))
       ).map(l=>l
-          .zip(flotaDe.drones)
-          .filter(tu=>tu._1.isSuccess)
-          .map(tu=>(tu._1.get,tu._2))
-          .map(tu=>Pedido(tu._1,tu._2))
-        )
+        .zip(flotaDe.drones)
+        .filter(tu=>tu._1.isSuccess)
+        .map(tu=>(tu._1.get,tu._2))
+        .map(tu=>Pedido(tu._1,tu._2))
+      )
   }
 
 }
