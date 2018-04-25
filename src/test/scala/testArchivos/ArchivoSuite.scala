@@ -86,13 +86,14 @@ class ArchivoSuite extends FunSuite{
   test("reportar Entregas"){
     val origen = "src/main/resources/in.txt"
     val listaRutas = leerArchivo(origen)
-    val dron = Dron(1,Posicion(0,0,N),3)
-    val destino = "src/main/resources/out.txt"
-    val reporte = reportarRutas(listaRutas,dron,Limite(10))
       .recover{case e: FileNotFoundException => {
         "ORIGEN NO EXISTENTE DEL ARCHIVO DE ENTRADA"
       }
       }.get
+    val dron = Dron(1,Posicion(0,0,N),3)
+    val destino = "src/main/resources/out.txt"
+    val reporte = reportarRutas(listaRutas,dron,Limite(10))
+
     println(escribirReporteEnArchivo(destino,reporte))
     assertResult("==Reporte de entregas==\n" +
       " (-1,5) dirección Norte\n" +
@@ -105,13 +106,14 @@ class ArchivoSuite extends FunSuite{
   test("reportar Entregas origen Falso"){
     val origen = "src/main/resources/inFalso.txt"
     val listaRutas = leerArchivo(origen)
-    val dron = Dron(1,Posicion(0,0,N),3)
-    val destino = "src/main/resources/outInFalso.txt"
-    val reporte = reportarRutas(listaRutas,dron,Limite(10))
       .recover{case e: FileNotFoundException => {
         "ORIGEN NO EXISTENTE DEL ARCHIVO DE ENTRADA"
       }
       }.get
+    val dron = Dron(1,Posicion(0,0,N),3)
+    val destino = "src/main/resources/outInFalso.txt"
+    val reporte = reportarRutas(listaRutas,dron,Limite(10))
+
     println(escribirReporteEnArchivo(destino,reporte))
     assertResult("ORIGEN NO EXISTENTE DEL ARCHIVO DE ENTRADA"){
         reporte
@@ -121,13 +123,14 @@ class ArchivoSuite extends FunSuite{
   test("reportar Entregas origen Exceso Lineas") {
     val origen = "src/main/resources/inExcesoLineas.txt"
     val listaRutas = leerArchivo(origen)
-    val dron = Dron(1, Posicion(0, 0, N), 3)
-    val destino = "src/main/resources/outExcesoLineas.txt"
-    val reporte = reportarRutas(listaRutas,dron,Limite(10))
       .recover{case e: FileNotFoundException => {
         "ORIGEN NO EXISTENTE DEL ARCHIVO DE ENTRADA"
       }
       }.get
+    val dron = Dron(1, Posicion(0, 0, N), 3)
+    val destino = "src/main/resources/outExcesoLineas.txt"
+    val reporte = reportarRutas(listaRutas,dron,Limite(10))
+
     println(escribirReporteEnArchivo(destino,reporte))
     assertResult("==Reporte de entregas==\n " +
       "(0,2) dirección Este\n " +
@@ -142,13 +145,14 @@ class ArchivoSuite extends FunSuite{
   test("reportar Entregas origen Saliendose Límites") {
     val origen = "src/main/resources/inSaliendoseLimites.txt"
     val listaRutas = leerArchivo(origen)
-    val dron = Dron(1, Posicion(0, 0, N), 3)
-    val destino = "src/main/resources/outSaliendoseLimites.txt"
-    val reporte = reportarRutas(listaRutas,dron,Limite(10))
       .recover{case e: FileNotFoundException => {
         "ORIGEN NO EXISTENTE DEL ARCHIVO DE ENTRADA"
       }
       }.get
+    val dron = Dron(1, Posicion(0, 0, N), 3)
+    val destino = "src/main/resources/outSaliendoseLimites.txt"
+    val reporte = reportarRutas(listaRutas,dron,Limite(10))
+
     println(escribirReporteEnArchivo(destino,reporte))
     assertResult("==Reporte de entregas==\n " +
       "(-1,6) dirección Oeste\n " +

@@ -80,7 +80,7 @@ sealed trait InterpreteServicioDron extends ServicioDron {
       }}"
   }
 
-   def reportarRutas(listaRutas: Try[List[Ruta]], dron: Dron, limite: Limite): Try[String] = {
+   def reportarRutas(listaRutas: List[Ruta], dron: Dron, limite: Limite): Try[String] = {
     listaRutas
               .map(lr => lr
                 .foldLeft(List(Either.cond(true,dron,""))){(led, ruta)=>
