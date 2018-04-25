@@ -6,7 +6,7 @@ import scala.util.Try
 import scala.math.{abs}
 
 sealed trait ServicioDron {
-  def reportarRutas(listaRutas: Try[List[Ruta]], dron:Dron, limite: Limite): Try[String]
+  def reportarRutas(listaRutas: List[Ruta], dron:Dron, limite: Limite): String
   def entregarPedido(dron:Either[String,Dron], ruta:Ruta, limite:Limite): Either[String,Dron]
 }
 
@@ -80,17 +80,15 @@ sealed trait InterpreteServicioDron extends ServicioDron {
       }}"
   }
 
-   def reportarRutas(listaRutas: List[Ruta], dron: Dron, limite: Limite): Try[String] = {
+   def reportarRutas(listaRutas: List[Ruta], dron: Dron, limite: Limite): String = {
     listaRutas
-              .map(lr => lr
-                .foldLeft(List(Either.cond(true,dron,""))){(led, ruta)=>
-                  (entregarPedido(led.head, ruta, limite))::led
-                }
-                .reverse.tail
-                .foldLeft("==Reporte de entregas=="){ (reporte,edron) =>
-                    s"$reporte\n ${edron.fold(s => s, d => imprimirPosicion(d.posicion))}"
-                }
-              )
+      .foldLeft(List(Either.cond(true,dron,""))){(led, ruta)=>
+        (entregarPedido(led.head, ruta, limite))::led
+      }
+      .reverse.tail
+      .foldLeft("==Reporte de entregas=="){ (reporte,edron) =>
+          s"$reporte\n ${edron.fold(s => s, d => imprimirPosicion(d.posicion))}"
+      }
   }
 }
 
