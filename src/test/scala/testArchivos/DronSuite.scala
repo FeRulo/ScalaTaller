@@ -11,7 +11,7 @@ import dominio.servicios.InterpreteServicioDron._
 import scala.io.Source
 import scala.util.{Success, Try}
 
-class ArchivoSuite extends FunSuite{
+class DronSuite extends FunSuite{
   object servicioRuta extends InterpreteServicioRuta
 
   test("crear lista de instrucciones"){
