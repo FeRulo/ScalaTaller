@@ -1,6 +1,6 @@
 package testArchivos
 
-import dominio.entidades.{archivosDe, tiempo}
+import dominio.entidades.{archivos, tiempo}
 import dominio.servicios.{InterpreteServicioDron, InterpreteServicioRuta}
 import org.scalatest.FunSuite
 import util.pool.global
@@ -12,7 +12,7 @@ class MultiplesDronesSuite extends FunSuite{
   object servicioRuta extends InterpreteServicioRuta
 
  test("probando inicializar pedidos"){
-    val listaArchivos = archivosDe.entrada
+    val listaArchivos = archivos.entrada
     val pedidos = InterpreteServicioDron.inicializarPedidos(listaArchivos)
     val fl = pedidos.flatMap(lp=>InterpreteServicioDron.reportarPedidos(lp))
     val res = Await.result(fl, 10 seconds)
@@ -22,7 +22,7 @@ class MultiplesDronesSuite extends FunSuite{
   }
 
   test("probar tiempo en paraleloo de inicializar Pedidos "){
-    val listaArchivos = archivosDe.entrada
+    val listaArchivos = archivos.entrada
     val estimatedElapsed:Double =  (tiempo.espera+10D)/1000
 
     val t1 = System.nanoTime()
@@ -35,7 +35,7 @@ class MultiplesDronesSuite extends FunSuite{
   }
 
   test("probar tiempo en paralelo de reportar o"){
-    val listaArchivos = archivosDe.entrada
+    val listaArchivos = archivos.entrada
     val pedidos = InterpreteServicioDron.inicializarPedidos(listaArchivos)
 
     val estimatedElapsed:Double =  (tiempo.espera+10D)/1000

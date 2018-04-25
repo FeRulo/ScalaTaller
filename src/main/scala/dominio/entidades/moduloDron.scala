@@ -11,6 +11,4 @@ case class Dron(id:Int, posicion:Posicion, carga:Int)
 case class Limite(radio:Int)
 
 object flotaDe {val drones:List[Dron]=(1 to 20).map(i=>Dron(i, Posicion(0, 0, N), 10)).toList}
-object tiempo{
-  var espera = 1100
-}
+object tiempo{var espera = 1100}
