@@ -1,12 +1,12 @@
 package testArchivos
 
-import dominio.entidades.archivosDe
-import dominio.servicios.{InterpreteServicioDron,  InterpreteServicioRuta, tiempo}
+import dominio.entidades.{archivosDe, tiempo}
+import dominio.servicios.{InterpreteServicioDron, InterpreteServicioRuta}
 import org.scalatest.FunSuite
 import util.pool.global
 
 import scala.concurrent.duration._
-import scala.concurrent.{Await}
+import scala.concurrent.Await
 
 class MultiplesDronesSuite extends FunSuite{
   object servicioRuta extends InterpreteServicioRuta
@@ -31,7 +31,7 @@ class MultiplesDronesSuite extends FunSuite{
     val elapsed = (System.nanoTime() - t1) / 1.0E09
 
     println(s"tiempo de espera: estimado: $estimatedElapsed ,real: $elapsed")
-    assert(elapsed >= estimatedElapsed)
+    assert(Math.abs(elapsed - estimatedElapsed)<=0.1)
   }
 
   test("probar tiempo en paralelo de reportar o"){
@@ -48,6 +48,6 @@ class MultiplesDronesSuite extends FunSuite{
     val elapsed = (System.nanoTime() - t1) / 1.0E09
 
     println(s"tiempo de espera: estimado: $estimatedElapsed ,real: $elapsed")
-    assert(elapsed >= estimatedElapsed)
+    assert(Math.abs(elapsed - estimatedElapsed)<=0.1)
   }
 }

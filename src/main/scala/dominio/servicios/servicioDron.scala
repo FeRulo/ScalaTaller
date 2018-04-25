@@ -13,10 +13,6 @@ sealed trait ServicioDron {
   def enviarDronPorRuta(dron:Dron, ruta:Ruta, limite:Limite): Either[String,Dron]
 }
 
-object tiempo{
-  var espera = 1100
-}
-
 sealed trait InterpreteServicioDron extends ServicioDron {
 
   def reportarPedidos(pedidos:List[Pedido]): Future[List[String]] = {
