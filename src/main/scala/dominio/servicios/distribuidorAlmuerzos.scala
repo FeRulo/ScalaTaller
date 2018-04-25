@@ -7,7 +7,7 @@ import scala.math.{abs}
 
 sealed trait ServicioDron {
   def reportarRutas(listaRutas: List[Ruta], dron:Dron, limite: Limite): String
-  def entregarPedido(dron:Either[String,Dron], ruta:Ruta, limite:Limite): Either[String,Dron]
+  def entregarPedido(dron:Dron, ruta:Ruta, limite:Limite): Either[String,Dron]
 }
 
 sealed trait InterpreteServicioDron extends ServicioDron {
@@ -62,12 +62,10 @@ sealed trait InterpreteServicioDron extends ServicioDron {
         s"La ruta envía el drón fuera del límite")
   }
 
-   def entregarPedido(dron: Either[String, Dron], ruta: Ruta, limite: Limite): Either[String, Dron] = {
-    dron.flatMap(d =>
-      validarRuta(ruta, d, limite).map(r =>{
-        Dron(d.id, verPosicionFinal(d.posicion, r), d.carga - 1)
+   def entregarPedido(dron: Dron, ruta: Ruta, limite: Limite): Either[String, Dron] = {
+      validarRuta(ruta, dron, limite).map(r =>{
+        Dron(dron.id, verPosicionFinal(dron.posicion, r), dron.carga - 1)
       })
-    )
   }
 
    def imprimirPosicion(posicion: Posicion): String = {
@@ -83,7 +81,7 @@ sealed trait InterpreteServicioDron extends ServicioDron {
    def reportarRutas(listaRutas: List[Ruta], dron: Dron, limite: Limite): String = {
     listaRutas
       .foldLeft(List(Either.cond(true,dron,""))){(led, ruta)=>
-        (entregarPedido(led.head, ruta, limite))::led
+        led.head.flatMap(d=>entregarPedido(d, ruta, limite))::led
       }
       .reverse.tail
       .foldLeft("==Reporte de entregas=="){ (reporte,edron) =>
