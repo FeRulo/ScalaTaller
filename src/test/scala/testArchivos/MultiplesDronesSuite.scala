@@ -1,20 +1,18 @@
 package testArchivos
 
-import java.io.FileNotFoundException
-
-import dominio.servicios.{InterpreteAdministradorPedidos, InterpreteServicioRuta, tiempo}
+import dominio.entidades.archivos
+import dominio.servicios.{InterpreteAdministradorPedidos,  InterpreteServicioRuta, tiempo}
 import org.scalatest.FunSuite
 import util.pool.global
 
 import scala.concurrent.duration._
-import scala.concurrent.{Await, Future}
-import scala.util.Success
+import scala.concurrent.{Await}
 
 class MultiplesDronesSuite extends FunSuite{
   object servicioRuta extends InterpreteServicioRuta
 
  test("probando inicializar pedidos"){
-    val listaArchivos = InterpreteAdministradorPedidos.inicializarArchivosEntrada()
+    val listaArchivos = archivos.entrada
     val pedidos = InterpreteAdministradorPedidos.inicializarPedidos(listaArchivos)
     val fl = pedidos.flatMap(lp=>InterpreteAdministradorPedidos.reportar(lp))
     assertResult((1 to 20).map(i=>"Escritura Exitosa").toList){
@@ -22,8 +20,8 @@ class MultiplesDronesSuite extends FunSuite{
     }
   }
 
-  test("probar tiempo de inicializar Pedidos en paralelo"){
-    val listaArchivos = InterpreteAdministradorPedidos.inicializarArchivosEntrada()
+  test("probar tiempo en paraleloo de inicializar Pedidos "){
+    val listaArchivos = archivos.entrada
     val estimatedElapsed:Double =  (tiempo.espera+10D)/1000
 
     val t1 = System.nanoTime()
@@ -35,8 +33,8 @@ class MultiplesDronesSuite extends FunSuite{
     assert(elapsed >= estimatedElapsed)
   }
 
-  test("probar tiempo de reportar en paralelo"){
-    val listaArchivos = InterpreteAdministradorPedidos.inicializarArchivosEntrada()
+  test("probar tiempo en paralelo de reportar o"){
+    val listaArchivos = archivos.entrada
     val pedidos = InterpreteAdministradorPedidos.inicializarPedidos(listaArchivos)
 
     val estimatedElapsed:Double =  (tiempo.espera+10D)/1000

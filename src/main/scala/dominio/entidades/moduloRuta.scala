@@ -22,3 +22,8 @@ object I extends Instruccion
 
 case class Ruta(instrucciones:List[Instruccion])
 case class Pedido(rutas: List[Ruta], dron:Dron)
+
+object archivos{
+  val entrada:List[String]=(1 to 20).map(i=>f"src/main/resources2/in/in$i%02d.txt").toList
+  val salida:List[String]=(1 to 20).map(i=>f"src/main/resources2/out/out$i%02d.txt").toList
+}
