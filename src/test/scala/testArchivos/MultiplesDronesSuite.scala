@@ -1,7 +1,7 @@
 package testArchivos
 
 import dominio.entidades.archivosDe
-import dominio.servicios.{InterpreteDistribuidorPedidosSimultaneos,  InterpreteServicioRuta, tiempo}
+import dominio.servicios.{InterpreteDistribuidorPedidosSimultaneos,  InterpreteServicioRuta, tiempoDe}
 import org.scalatest.FunSuite
 import util.pool.global
 
@@ -23,7 +23,7 @@ class MultiplesDronesSuite extends FunSuite{
 
   test("probar tiempo en paraleloo de inicializar Pedidos "){
     val listaArchivos = archivosDe.entrada
-    val estimatedElapsed:Double =  (tiempo.espera+10D)/1000
+    val estimatedElapsed:Double =  (tiempoDe.espera+10D)/1000
 
     val t1 = System.nanoTime()
     val pedidos = InterpreteDistribuidorPedidosSimultaneos.inicializarPedidos(listaArchivos)
@@ -38,7 +38,7 @@ class MultiplesDronesSuite extends FunSuite{
     val listaArchivos = archivosDe.entrada
     val pedidos = InterpreteDistribuidorPedidosSimultaneos.inicializarPedidos(listaArchivos)
 
-    val estimatedElapsed:Double =  (tiempo.espera+10D)/1000
+    val estimatedElapsed:Double =  (tiempoDe.espera+10D)/1000
 
     val t1 = System.nanoTime()
     val fl = for{

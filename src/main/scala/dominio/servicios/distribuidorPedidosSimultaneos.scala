@@ -9,7 +9,7 @@ import util.pool.global
 sealed trait DistribuidorPedidosSimultaneos{
   def reportar(pedidos:List[Pedido]): Future[List[String]]
 }
-object tiempo{
+object tiempoDe{
   var espera = 1100
 }
 
@@ -30,14 +30,14 @@ sealed trait InterpreteDistribuidorPedidosSimultaneos extends DistribuidorPedido
 
   def reportarUn(pedido: Pedido):Future[String] ={
     Future{
-      Thread.sleep(tiempo.espera)
+      Thread.sleep(tiempoDe.espera)
       InterpreteServicioDron.reportarRutas(Try{pedido.rutas},pedido.dron,Limite(10)).get
     }
   }
 
   def inicializarUn(archivo:String):Future[Try[List[Ruta]]] = {
     Future{
-      Thread.sleep(tiempo.espera)
+      Thread.sleep(tiempoDe.espera)
       InterpreteServicioArchivo.leerArchivo(archivo)
     }
   }
