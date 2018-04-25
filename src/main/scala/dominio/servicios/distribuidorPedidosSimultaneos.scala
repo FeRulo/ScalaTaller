@@ -31,7 +31,7 @@ sealed trait InterpreteDistribuidorPedidosSimultaneos extends DistribuidorPedido
   def reportarUn(pedido: Pedido):Future[String] ={
     Future{
       Thread.sleep(tiempoDe.espera)
-      InterpreteServicioDron.reportarRutas(Try{pedido.rutas},pedido.dron,Limite(10)).get
+      InterpreteServicioDron.reportarRutas(pedido.rutas,pedido.dron,Limite(10))
     }
   }
 

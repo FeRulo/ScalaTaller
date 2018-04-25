@@ -6,9 +6,10 @@ import scala.util.Try
 import scala.math.{abs}
 
 sealed trait ServicioDron {
-  def reportarRutas(listaRutas: Try[List[Ruta]], dron:Dron, limite: Limite): Try[String]
-  def entregarPedido(dron:Either[String,Dron], ruta:Ruta, limite:Limite): Either[String,Dron]
+  def reportarRutas(listaRutas: List[Ruta], dron:Dron, limite: Limite): String
+  def entregarPedido(dron:Dron, ruta:Ruta, limite:Limite): Either[String,Dron]
 }
+
 sealed trait InterpreteServicioDron extends ServicioDron {
 
   def girar(posicion: Posicion, instruccion: Instruccion): Posicion = {
@@ -28,6 +29,7 @@ sealed trait InterpreteServicioDron extends ServicioDron {
       case _=> posicion
     }
   }
+
   def adelantar(posicion: Posicion): Posicion = {
     posicion.d match {
       case N => Posicion(posicion.x, posicion.y + 1, posicion.d)
@@ -36,6 +38,7 @@ sealed trait InterpreteServicioDron extends ServicioDron {
       case O => Posicion(posicion.x - 1, posicion.y, posicion.d)
     }
   }
+
   def verPosicionFinal(posicion0: Posicion, ruta: Ruta): Posicion = {
     ruta.instrucciones.foldLeft(posicion0) { (p, i) => {
       i match {
@@ -46,23 +49,25 @@ sealed trait InterpreteServicioDron extends ServicioDron {
     }
     }
   }
+
   def validarPosicionFinalRuta(posicion0: Posicion, ruta: Ruta, limite: Limite): Boolean = {
     val pf = verPosicionFinal(posicion0, ruta)
     abs(pf.x) <= limite.radio && abs(pf.y) <= limite.radio
   }
+
   def validarRuta(ruta: Ruta, dron: Dron, limite: Limite): Either[String, Ruta] = {
     Right(ruta)
       .filterOrElse(r => dron.carga > 0, s"El dron no puede entregar más pedidos")
       .filterOrElse(r => validarPosicionFinalRuta(dron.posicion, r, limite),
         s"La ruta envía el drón fuera del límite")
   }
-  def entregarPedido(dron: Either[String, Dron], ruta: Ruta, limite: Limite): Either[String, Dron] = {
-    dron.flatMap(d =>
-      validarRuta(ruta, d, limite).map(r =>{
-        Dron(d.id, verPosicionFinal(d.posicion, r), d.carga - 1)
-      })
-    )
+
+  def entregarPedido(dron: Dron, ruta: Ruta, limite: Limite): Either[String, Dron] = {
+    validarRuta(ruta, dron, limite).map(r =>{
+      Dron(dron.id, verPosicionFinal(dron.posicion, r), dron.carga - 1)
+    })
   }
+
   def imprimirPosicion(posicion: Posicion): String = {
     s"(${posicion.x},${posicion.y}) dirección ${
       posicion.d match {
@@ -73,17 +78,15 @@ sealed trait InterpreteServicioDron extends ServicioDron {
       }}"
   }
 
-  def reportarRutas(listaRutas: Try[List[Ruta]], dron: Dron, limite: Limite): Try[String] = {
+  def reportarRutas(listaRutas: List[Ruta], dron: Dron, limite: Limite): String = {
     listaRutas
-      .map(lr => lr
-        .foldLeft(List(Either.cond(true,dron,""))){(led, ruta)=>
-          (entregarPedido(led.head, ruta, limite))::led
-        }
-        .reverse.tail
-        .foldLeft("==Reporte de entregas=="){ (reporte,edron) =>
-          s"$reporte\n ${edron.fold(s => s, d => imprimirPosicion(d.posicion))}"
-        }
-      )
+      .foldLeft(List(Either.cond(true,dron,""))){(led, ruta)=>
+        led.head.flatMap(d=>entregarPedido(d, ruta, limite))::led
+      }
+      .reverse.tail
+      .foldLeft("==Reporte de entregas=="){ (reporte,edron) =>
+        s"$reporte\n ${edron.fold(s => s, d => imprimirPosicion(d.posicion))}"
+      }
   }
 }
 
