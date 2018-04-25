@@ -1,28 +1,25 @@
 package dominio.servicios
 
 import dominio.entidades._
-import dominio.servicios.InterpreteServicioArchivo.escribirReporteEnArchivo
-import scala.concurrent.duration._
-import scala.concurrent.{Await, Future}
+import dominio.servicios.InterpreteServicioArchivo.{escribirReporteEnArchivo,traerArchivoSalida}
+import scala.concurrent.{Future}
 import scala.util.Try
 import util.pool.global
 
-sealed trait AdministradorPedidos{
+sealed trait DistribuidorPedidosSimultaneos{
   def reportar(pedidos:List[Pedido]): Future[List[String]]
 }
 object tiempo{
   var espera = 1100
 }
 
-sealed trait InterpreteAdministradorPedidos extends AdministradorPedidos{
+sealed trait InterpreteDistribuidorPedidosSimultaneos extends DistribuidorPedidosSimultaneos{
 
   override def reportar(pedidos:List[Pedido]): Future[List[String]] = {
     Future
       .sequence(
         pedidos
-          .map(lp=>Future{lp})
-          .map(f=>f.flatMap(p=>reportarUn(p)))
-          .zip(archivos.salida)
+          .map(pedido=>(reportarUn(pedido),traerArchivoSalida(pedido.dron)))
           .map(tu=>tu._1.map(s=>
               escribirReporteEnArchivo(tu._2,s)
             )
@@ -30,9 +27,11 @@ sealed trait InterpreteAdministradorPedidos extends AdministradorPedidos{
       )
   }
 
-  def reportarUn(pedido:Pedido):Future[String] ={
-    Thread.sleep(tiempo.espera)
-    Future{InterpreteServicioDron.reportarRutas(Try{pedido.rutas},pedido.dron,Limite(10)).get}
+  def reportarUn(pedido: Pedido):Future[String] ={
+    Future{
+      Thread.sleep(tiempo.espera)
+      InterpreteServicioDron.reportarRutas(Try{pedido.rutas},pedido.dron,Limite(10)).get
+    }
   }
 
   def inicializarPedidos(listaArchivos: List[String]):Future[List[Pedido]] = {
@@ -44,7 +43,7 @@ sealed trait InterpreteAdministradorPedidos extends AdministradorPedidos{
           InterpreteServicioArchivo.leerArchivo(s)
         })
       )).map(l=>l
-          .zip(flota.drones)
+          .zip(flotaDe.drones)
           .filter(tu=>tu._1.isSuccess)
           .map(tu=>(tu._1.get,tu._2))
           .map(tu=>Pedido(tu._1,tu._2))
@@ -53,4 +52,4 @@ sealed trait InterpreteAdministradorPedidos extends AdministradorPedidos{
 
 }
 
-object InterpreteAdministradorPedidos extends InterpreteAdministradorPedidos
+object InterpreteDistribuidorPedidosSimultaneos extends InterpreteDistribuidorPedidosSimultaneos

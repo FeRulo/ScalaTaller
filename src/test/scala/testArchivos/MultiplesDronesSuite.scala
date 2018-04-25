@@ -1,7 +1,7 @@
 package testArchivos
 
-import dominio.entidades.archivos
-import dominio.servicios.{InterpreteAdministradorPedidos,  InterpreteServicioRuta, tiempo}
+import dominio.entidades.archivosDe
+import dominio.servicios.{InterpreteDistribuidorPedidosSimultaneos,  InterpreteServicioRuta, tiempo}
 import org.scalatest.FunSuite
 import util.pool.global
 
@@ -12,20 +12,20 @@ class MultiplesDronesSuite extends FunSuite{
   object servicioRuta extends InterpreteServicioRuta
 
  test("probando inicializar pedidos"){
-    val listaArchivos = archivos.entrada
-    val pedidos = InterpreteAdministradorPedidos.inicializarPedidos(listaArchivos)
-    val fl = pedidos.flatMap(lp=>InterpreteAdministradorPedidos.reportar(lp))
+    val listaArchivos = archivosDe.entrada
+    val pedidos = InterpreteDistribuidorPedidosSimultaneos.inicializarPedidos(listaArchivos)
+    val fl = pedidos.flatMap(lp=>InterpreteDistribuidorPedidosSimultaneos.reportar(lp))
     assertResult((1 to 20).map(i=>"Escritura Exitosa").toList){
       Await.result(fl, 10 seconds)
     }
   }
 
   test("probar tiempo en paraleloo de inicializar Pedidos "){
-    val listaArchivos = archivos.entrada
+    val listaArchivos = archivosDe.entrada
     val estimatedElapsed:Double =  (tiempo.espera+10D)/1000
 
     val t1 = System.nanoTime()
-    val pedidos = InterpreteAdministradorPedidos.inicializarPedidos(listaArchivos)
+    val pedidos = InterpreteDistribuidorPedidosSimultaneos.inicializarPedidos(listaArchivos)
     Await.result(pedidos, 10 seconds)
     val elapsed = (System.nanoTime() - t1) / 1.0E09
 
@@ -34,15 +34,15 @@ class MultiplesDronesSuite extends FunSuite{
   }
 
   test("probar tiempo en paralelo de reportar o"){
-    val listaArchivos = archivos.entrada
-    val pedidos = InterpreteAdministradorPedidos.inicializarPedidos(listaArchivos)
+    val listaArchivos = archivosDe.entrada
+    val pedidos = InterpreteDistribuidorPedidosSimultaneos.inicializarPedidos(listaArchivos)
 
     val estimatedElapsed:Double =  (tiempo.espera+10D)/1000
 
     val t1 = System.nanoTime()
     val fl = for{
       lp<-pedidos
-    }yield(InterpreteAdministradorPedidos.reportar(lp))
+    }yield(InterpreteDistribuidorPedidosSimultaneos.reportar(lp))
     Await.result(fl, 10 seconds)
     val elapsed = (System.nanoTime() - t1) / 1.0E09
 

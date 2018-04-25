@@ -2,7 +2,7 @@ package dominio.servicios
 
 import java.io.{File, PrintWriter}
 
-import dominio.entidades.Ruta
+import dominio.entidades.{Dron, Pedido, Ruta}
 import dominio.servicios.InterpreteServicioRuta._
 
 import scala.io.Source
@@ -29,6 +29,10 @@ sealed trait InterpreteServicioArchivo extends ServicioArchivo{
     pw.write(lineas)
     pw.close
     s"Escritura Exitosa"
+  }
+
+  def traerArchivoSalida(dron:Dron): String={
+    f"src/main/resources2/out/out${dron.id}%02d.txt"
   }
 }
 
