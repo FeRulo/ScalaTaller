@@ -151,7 +151,6 @@ class ArchivoSuite extends FunSuite{
     val dron = Dron(1, Posicion(0, 0, N), 3)
     val destino = "src/main/resources/outSaliendoseLimites.txt"
     val reporte = reportarRutas(listaRutas,dron,Limite(10))
-    println(reporte)
     println(escribirReporteEnArchivo(destino,reporte))
     assertResult("==Reporte de entregas==\n " +
       "(-1,6) dirección Oeste\n " +
