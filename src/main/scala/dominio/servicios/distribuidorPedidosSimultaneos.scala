@@ -45,7 +45,7 @@ sealed trait InterpreteDistribuidorPedidosSimultaneos extends DistribuidorPedido
   def inicializarPedidos(listaArchivos: List[String]):Future[List[Pedido]] = {
     Future.sequence(
         listaArchivos
-          .map(s=>inicializarUn(s))
+          .map(archivo=>inicializarUn(archivo))
       ).map(l=>l
           .zip(flotaDe.drones)
           .filter(tu=>tu._1.isSuccess)
