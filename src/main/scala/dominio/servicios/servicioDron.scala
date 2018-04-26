@@ -30,7 +30,11 @@ sealed trait InterpreteServicioDron extends ServicioDron {
   def reportarRutas(listaRutas: List[Ruta], dron: Dron, limite: Limite): String = {
     listaRutas
       .foldLeft(List(Either.cond(true,dron,""))){(led, ruta)=>
-        led.head.flatMap(d=>enviarDronPorRuta(d, ruta, limite))::led
+        led.head.isRight match{
+          case true=>led.head.flatMap(d=>enviarDronPorRuta(d, ruta, limite))::led
+          case false=>led
+        }
+
       }
       .reverse.tail
       .foldLeft("==Reporte de entregas=="){ (reporte,edron) =>
@@ -74,7 +78,7 @@ sealed trait InterpreteServicioDron extends ServicioDron {
     Right(ruta)
       .filterOrElse(r => dron.carga > 0, s"El dron no puede entregar más pedidos")
       .filterOrElse(r => validarPosicionFinalRuta(dron.posicion, r, limite),
-        s"La ruta envía el drón fuera del límite")
+        s"La ruta: ${InterpreteServicioRuta.imprimirRuta(ruta)} envía el drón fuera del límite")
   }
 
   def validarPosicionFinalRuta(posicion0: Posicion, ruta: Ruta, limite: Limite): Boolean = {

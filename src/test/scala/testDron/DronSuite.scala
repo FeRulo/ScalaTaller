@@ -134,7 +134,6 @@ class DronSuite extends FunSuite{
       "(0,2) dirección Este\n " +
       "(1,2) dirección Este\n" +
       " (2,4) dirección Este\n" +
-      " El dron no puede entregar más pedidos\n" +
       " El dron no puede entregar más pedidos") {
       reporte
     }
@@ -153,8 +152,7 @@ class DronSuite extends FunSuite{
     println(InterpreteServicioArchivo.escribirReporteEnArchivo(destino,reporte))
     assertResult("==Reporte de entregas==\n " +
       "(-1,6) dirección Oeste\n " +
-      "La ruta envía el drón fuera del límite\n " +
-      "La ruta envía el drón fuera del límite") {
+      "La ruta: DAAAAAA envía el drón fuera del límite") {
       reporte
     }
 

@@ -3,5 +3,4 @@
  (-3,5) dirección Norte
  (-5,7) dirección Este
  (-3,9) dirección Este
- La ruta envía el drón fuera del límite
- La ruta envía el drón fuera del límite
+ La ruta: AIADIAD envía el drón fuera del límite

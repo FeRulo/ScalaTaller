@@ -1,4 +1,12 @@
 ==Reporte de entregas==
- (-2,2) dirección Oeste
- (-3,5) dirección Norte
- (-5,7) dirección Este
+ (0,4) dirección Oeste
+ (-4,4) dirección Sur
+ (-4,0) dirección Este
+ (0,0) dirección Norte
+ (0,4) dirección Oeste
+ (-4,4) dirección Sur
+ (-4,0) dirección Este
+ (0,0) dirección Norte
+ (0,4) dirección Oeste
+ (-4,4) dirección Sur
+ El dron no puede entregar más pedidos

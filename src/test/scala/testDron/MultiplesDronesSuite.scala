@@ -1,7 +1,7 @@
 package testArchivos
 
-import dominio.entidades.{archivos, tiempo}
-import dominio.servicios.{InterpreteServicioDron}
+import dominio.entidades._
+import dominio.servicios.{InterpreteServicioDron, InterpreteServicioRuta}
 import org.scalatest.FunSuite
 import util.pool.global
 
@@ -48,5 +48,10 @@ class MultiplesDronesSuite extends FunSuite{
 
     println(s"tiempo de espera: estimado: $estimatedElapsed ,real: $elapsed")
     assert(Math.abs(elapsed - estimatedElapsed)<=0.1)
+  }
+
+  test("nn"){
+    assert(InterpreteServicioRuta.imprimirInstruccion(A)=="A")
+    assert(InterpreteServicioRuta.imprimirRuta(Ruta(List(A,A,A,I,D)))=="AAAID")
   }
 }

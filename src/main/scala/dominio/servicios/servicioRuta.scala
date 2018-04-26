@@ -1,6 +1,6 @@
 package dominio.servicios
 
-import dominio.entidades.{Instruccion, Ruta}
+import dominio.entidades.{A, D, I, Instruccion, Ruta}
 
 import scala.util.Try
 
@@ -28,6 +28,17 @@ sealed trait InterpreteServicioRuta extends ServicioRuta{
 
   def traerRuta(linea: String): Ruta = {
       pasarListaInstruccionesARuta(traerListaInstruccines(linea))
+  }
+
+  def imprimirRuta(ruta: Ruta):String = {
+    ruta.instrucciones.foldLeft("")((s,i)=>s+imprimirInstruccion(i))
+  }
+  def imprimirInstruccion(instruccion: Instruccion):String={
+    s"${instruccion match {
+        case A => "A"
+        case I => "I"
+        case D => "D"
+      }}"
   }
 }
 
