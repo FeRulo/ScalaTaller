@@ -1,33 +1,34 @@
 package dominio.servicios
 
-import dominio.entidades._
+import dominio.entidades.{A, D, Dron, E, I, Instruccion, Limite, N, O, Pedido, Posicion, Reporte, Ruta, S, flotaDe, tiempo}
 import util.pool.global
+
 import scala.concurrent.Future
 import scala.util.Try
 import scala.math.abs
 
 sealed trait ServicioDron {
-  def reportarPedidos(pedidos:List[Pedido]): Future[List[String]]
-  def reportarRutas(listaRutas: List[Ruta], dron:Dron, limite: Limite): String
+  def reportarPedidos(pedidos:List[Pedido]): Future[List[Reporte]]
+  def reportarRutas(listaRutas: List[Ruta], dron:Dron, limite: Limite): Reporte
   def enviarDronPorRuta(dron:Dron, ruta:Ruta, limite:Limite): Either[String,Dron]
 }
 
 sealed trait InterpreteServicioDron extends ServicioDron {
 
-  def reportarPedidos(pedidos:List[Pedido]): Future[List[String]] = {
+  def reportarPedidos(pedidos:List[Pedido]): Future[List[Reporte]] = {
     Future
       .sequence(
         pedidos
           .map(pedido=>(reportarPedido(pedido),InterpreteServicioArchivo.traerArchivoSalida(pedido.dron)))
           .map(tu=>tu._1
-            .map(s=>
-              InterpreteServicioArchivo.escribirReporteEnArchivo(tu._2,s)
+            .map(r=>
+              Reporte(InterpreteServicioArchivo.escribirReporteEnArchivo(tu._2,r.historial),r.dron)
             )
           )
       )
   }
 
-  def reportarRutas(listaRutas: List[Ruta], dron: Dron, limite: Limite): String = {
+  def reportarRutas(listaRutas: List[Ruta], dron: Dron, limite: Limite): Reporte = {
     listaRutas
       .foldLeft(List(Either.cond(true,dron,""))){(led, ruta)=>
         led.head.isRight match{
@@ -37,12 +38,15 @@ sealed trait InterpreteServicioDron extends ServicioDron {
 
       }
       .reverse.tail
-      .foldLeft("==Reporte de entregas=="){ (reporte,edron) =>
-        s"$reporte\n ${edron.fold(s => s, d => imprimirPosicion(d.posicion))}"
+      .foldLeft(Reporte("==Reporte de entregas==",dron)){ (reporte,edron) =>
+        Reporte(
+          s"${reporte.historial}\n ${edron.fold(s => s, d => imprimirPosicion(d.posicion))}",
+          edron.getOrElse(reporte.dron)
+        )
       }
   }
 
-  def reportarPedido(pedido: Pedido):Future[String] ={
+  def reportarPedido(pedido: Pedido):Future[Reporte] ={
     Future{
       Thread.sleep(tiempo.espera)
       InterpreteServicioDron.reportarRutas(pedido.rutas,pedido.dron,Limite(10))
@@ -92,6 +96,7 @@ sealed trait InterpreteServicioDron extends ServicioDron {
         case A => adelantar(p)
         case I => girar(p,I)
         case D => girar(p,D)
+        case _ => p
       }
     }
     }

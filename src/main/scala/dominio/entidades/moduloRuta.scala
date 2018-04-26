@@ -4,7 +4,7 @@ import scala.util.{Failure, Success, Try}
 
 sealed trait Instruccion
 
-object Instruccion {
+object Instruccion extends Instruccion {
   def of(i:String):Try[Instruccion] ={
     i match {
       case "A" => Success{A}
@@ -22,5 +22,6 @@ object I extends Instruccion
 
 case class Ruta(instrucciones: List[Instruccion])
 case class Pedido(rutas: List[Ruta], dron:Dron)
+case class Reporte(historial: String, dron: Dron)
 
 object archivos{val entrada:List[String]=(1 to 20).map(i=>f"src/main/resources2/in/in$i%02d.txt").toList}

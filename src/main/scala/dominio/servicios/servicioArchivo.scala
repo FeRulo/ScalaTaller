@@ -27,7 +27,7 @@ sealed trait InterpreteServicioArchivo extends ServicioArchivo{
     val pw = new PrintWriter(new File(destino ))
     pw.write(lineas)
     pw.close
-    s"Escritura Exitosa"
+    lineas
   }
 
   def traerArchivoSalida(dron:Dron): String={

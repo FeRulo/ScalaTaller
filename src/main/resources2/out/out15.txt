@@ -8,5 +8,5 @@
  (-4,0) dirección Este
  (0,0) dirección Norte
  (0,4) dirección Oeste
- (-4,4) dirección Sur
+ (-10,4) dirección Sur
  El dron no puede entregar más pedidos

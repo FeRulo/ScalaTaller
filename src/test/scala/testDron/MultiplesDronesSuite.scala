@@ -15,9 +15,26 @@ class MultiplesDronesSuite extends FunSuite{
     val pedidos = InterpreteServicioDron.inicializarPedidos(listaArchivos)
     val fl = pedidos.flatMap(lp=>InterpreteServicioDron.reportarPedidos(lp))
     val res = Await.result(fl, 10 seconds)
-    assertResult((1 to res.size).map(i=>"Escritura Exitosa").toList){
-      res
+    assertResult("(-3,5) dirección Norte\n" +
+      "(-5,7) dirección Este\n" +
+      "(-5,7) dirección Este\n" +
+      "(-5,7) dirección Este\n" +
+      "(-5,7) dirección Este\n" +
+      "(-3,9) dirección Este\n" +
+      "(-5,7) dirección Este\n" +
+      "(-5,7) dirección Este\n" +
+      "(-5,7) dirección Este\n" +
+      "(-5,7) dirección Este\n" +
+      "(-5,7) dirección Este\n" +
+      "(-5,7) dirección Este\n" +
+      "(-10,4) dirección Sur\n" +
+      "(-5,7) dirección Este\n" +
+      "(-5,7) dirección Este\n" +
+      "(-5,7) dirección Este\n" +
+      "(-5,7) dirección Este\n"){
+      res.foldLeft(""){(s,r)=>s"$s${InterpreteServicioDron.imprimirPosicion(r.dron.posicion)}\n"}
     }
+
   }
 
   test("probar tiempo en paralelo de inicializar Pedidos "){

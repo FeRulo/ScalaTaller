@@ -92,13 +92,11 @@ class DronSuite extends FunSuite{
     val dron = Dron(1,Posicion(0,0,N),3)
     val destino = "src/main/resources/out.txt"
     val reporte = InterpreteServicioDron.reportarRutas(listaRutas,dron,Limite(10))
-
-    println(InterpreteServicioArchivo.escribirReporteEnArchivo(destino,reporte))
     assertResult("==Reporte de entregas==\n" +
       " (-1,5) dirección Norte\n" +
       " (-1,8) dirección Norte\n" +
       " (-1,9) dirección Norte"){
-      reporte
+      InterpreteServicioArchivo.escribirReporteEnArchivo(destino,reporte.historial)
     }
   }
 
@@ -112,9 +110,8 @@ class DronSuite extends FunSuite{
     val dron = Dron(1,Posicion(0,0,N),3)
     val destino = "src/main/resources/outInFalso.txt"
     val reporte = InterpreteServicioDron.reportarRutas(listaRutas,dron,Limite(10))
-    println(InterpreteServicioArchivo.escribirReporteEnArchivo(destino,reporte))
     assertResult("==Reporte de entregas==\n (0,0) dirección Norte"){
-      reporte
+      InterpreteServicioArchivo.escribirReporteEnArchivo(destino,reporte.historial)
     }
   }
 
@@ -128,18 +125,16 @@ class DronSuite extends FunSuite{
     val dron = Dron(1, Posicion(0, 0, N), 3)
     val destino = "src/main/resources/outExcesoLineas.txt"
     val reporte = InterpreteServicioDron.reportarRutas(listaRutas,dron,Limite(10))
-
-    println(InterpreteServicioArchivo.escribirReporteEnArchivo(destino,reporte))
     assertResult("==Reporte de entregas==\n " +
       "(0,2) dirección Este\n " +
       "(1,2) dirección Este\n" +
       " (2,4) dirección Este\n" +
       " El dron no puede entregar más pedidos") {
-      reporte
+      InterpreteServicioArchivo.escribirReporteEnArchivo(destino,reporte.historial)
     }
   }
 
-  test("reportar Entregas origen Saliendose Límites") {
+  test("reportar Entregas origen Saliendose Límites, el dron debe quedar en la última posición válida") {
     val origen = "src/main/resources/inSaliendoseLimites.txt"
     val listaRutas = InterpreteServicioArchivo.leerArchivo(origen)
       .recover{case e: FileNotFoundException => {
@@ -149,11 +144,11 @@ class DronSuite extends FunSuite{
     val dron = Dron(1, Posicion(0, 0, N), 3)
     val destino = "src/main/resources/outSaliendoseLimites.txt"
     val reporte = InterpreteServicioDron.reportarRutas(listaRutas,dron,Limite(10))
-    println(InterpreteServicioArchivo.escribirReporteEnArchivo(destino,reporte))
     assertResult("==Reporte de entregas==\n " +
       "(-1,6) dirección Oeste\n " +
-      "La ruta: DAAAAAA envía el drón fuera del límite") {
-      reporte
+      "La ruta: DAAAAAA envía el drón fuera del límite" +
+      "(-1,6) dirección Oeste") {
+      s"${InterpreteServicioArchivo.escribirReporteEnArchivo(destino,reporte.historial)}${InterpreteServicioDron.imprimirPosicion(reporte.dron.posicion)}"
     }
 
   }
