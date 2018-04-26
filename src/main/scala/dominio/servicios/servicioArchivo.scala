@@ -2,8 +2,7 @@ package dominio.servicios
 
 import java.io.{File, PrintWriter}
 
-import dominio.entidades.{Dron, Pedido, Ruta}
-import dominio.servicios.InterpreteServicioRuta._
+import dominio.entidades.{Dron, Ruta}
 
 import scala.io.Source
 import scala.util.Try
@@ -20,7 +19,7 @@ sealed trait InterpreteServicioArchivo extends ServicioArchivo{
     for{
       lista<-lineas
     }yield(
-      lista.map(s=>traerRuta(s))
+      lista.map(s=>InterpreteServicioRuta.traerRuta(s))
     )
   }
 

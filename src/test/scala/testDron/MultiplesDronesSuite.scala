@@ -1,7 +1,7 @@
 package testArchivos
 
 import dominio.entidades.{archivos, tiempo}
-import dominio.servicios.{InterpreteServicioDron, InterpreteServicioRuta}
+import dominio.servicios.{InterpreteServicioDron}
 import org.scalatest.FunSuite
 import util.pool.global
 
@@ -9,7 +9,6 @@ import scala.concurrent.duration._
 import scala.concurrent.Await
 
 class MultiplesDronesSuite extends FunSuite{
-  object servicioRuta extends InterpreteServicioRuta
 
  test("probando inicializar pedidos"){
     val listaArchivos = archivos.entrada

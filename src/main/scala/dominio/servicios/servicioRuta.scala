@@ -12,7 +12,7 @@ sealed trait ServicioRuta {
 
 }
 
-trait InterpreteServicioRuta extends ServicioRuta{
+sealed trait InterpreteServicioRuta extends ServicioRuta{
 
   def pasarListaInstruccionesARuta(listaInstrucciones: List[Instruccion]): Ruta = {
     Ruta(listaInstrucciones)

@@ -1,7 +1,6 @@
 package dominio.servicios
 
 import dominio.entidades._
-import dominio.servicios.InterpreteServicioArchivo.{escribirReporteEnArchivo, traerArchivoSalida}
 import util.pool.global
 import scala.concurrent.Future
 import scala.util.Try
@@ -19,10 +18,10 @@ sealed trait InterpreteServicioDron extends ServicioDron {
     Future
       .sequence(
         pedidos
-          .map(pedido=>(reportarPedido(pedido),traerArchivoSalida(pedido.dron)))
+          .map(pedido=>(reportarPedido(pedido),InterpreteServicioArchivo.traerArchivoSalida(pedido.dron)))
           .map(tu=>tu._1
             .map(s=>
-              escribirReporteEnArchivo(tu._2,s)
+              InterpreteServicioArchivo.escribirReporteEnArchivo(tu._2,s)
             )
           )
       )
