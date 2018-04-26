@@ -20,7 +20,7 @@ class MultiplesDronesSuite extends FunSuite{
     }
   }
 
-  test("probar tiempo en paraleloo de inicializar Pedidos "){
+  test("probar tiempo en paralelo de inicializar Pedidos "){
     val listaArchivos = archivos.entrada
     val estimatedElapsed:Double =  (tiempo.espera+10D)/1000
 
@@ -50,8 +50,4 @@ class MultiplesDronesSuite extends FunSuite{
     assert(Math.abs(elapsed - estimatedElapsed)<=0.1)
   }
 
-  test("nn"){
-    assert(InterpreteServicioRuta.imprimirInstruccion(A)=="A")
-    assert(InterpreteServicioRuta.imprimirRuta(Ruta(List(A,A,A,I,D)))=="AAAID")
-  }
 }
